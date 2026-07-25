@@ -15,9 +15,21 @@ fi
 # quietly boots on .env.example, whose APP_KEY is empty, and every request
 # returns a bare 500 because APP_DEBUG is off.
 if [ "$APP_ENV" = "production" ]; then
-    if [ -z "$APP_KEY" ]; then
-        echo "FATAL: APP_KEY is not set in the environment." >&2
-        echo "       Generate one and put it in .env.production:" >&2
+    # Both an empty and a malformed key produce the same symptom otherwise: a
+    # bare 500 on every request, with APP_DEBUG=false hiding the reason.
+    key_problem=$(php -r '
+        $k = (string) getenv("APP_KEY");
+        if ($k === "") { echo "APP_KEY is not set"; exit; }
+        if (str_starts_with($k, "base64:")) { $k = base64_decode(substr($k, 7), true); }
+        if ($k === false) { echo "APP_KEY is not valid base64"; exit; }
+        $len = strlen($k);
+        if ($len !== 32) { echo "APP_KEY decodes to {$len} bytes, AES-256-CBC needs 32"; }
+    ')
+
+    if [ -n "$key_problem" ]; then
+        echo "FATAL: $key_problem." >&2
+        echo "       Quotes and stray whitespace in .env.production are the usual cause." >&2
+        echo "       Generate a fresh one:" >&2
         echo "       docker run --rm php:8.5-cli php -r \"echo 'base64:'.base64_encode(random_bytes(32)).PHP_EOL;\"" >&2
         exit 1
     fi
