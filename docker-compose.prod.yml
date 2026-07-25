@@ -1,0 +1,58 @@
+# Production/demo stack for a shared host.
+#
+# Isolated from anything else on the box by construction:
+#   * its own compose project name, so container and network names cannot clash
+#   * its own database container and named volume — it never touches a host MySQL
+#   * nginx binds to 127.0.0.1 only by default, so the port is not exposed to the
+#     internet and your existing web server fronts it
+#
+# Usage:
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+name: cuttosize-demo
+
+services:
+  app:
+    build:
+      context: .
+      target: prod
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      target: web
+    restart: unless-stopped
+    ports:
+      # 127.0.0.1 by default: reachable only from the host, to be reverse-proxied.
+      # Set DEMO_BIND=0.0.0.0 to expose it directly on the server's IP.
+      - "${DEMO_BIND:-127.0.0.1}:${DEMO_PORT:-8081}:80"
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    # Deliberately no host port — nothing outside this compose project reaches it.
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-cuttosize}
+      MYSQL_USER: ${DB_USERNAME:-cuttosize}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env.production}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD in .env.production}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-p${DB_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  mysql-data:

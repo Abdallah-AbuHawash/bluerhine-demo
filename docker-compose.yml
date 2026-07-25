@@ -3,6 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # Development image: source is bind-mounted over it, Vite serves assets.
+      # The production stages live in the same Dockerfile — see
+      # docker-compose.prod.yml.
+      target: base
     volumes:
       - .:/var/www/html
     # Database credentials live in .env only. Exported here they would be real
