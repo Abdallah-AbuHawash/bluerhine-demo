@@ -14,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // The container is only reachable through the reverse proxy in front of
+        // it, so its forwarded headers are trusted. Without this Laravel builds
+        // http:// URLs behind an https:// proxy and the browser blocks the
+        // assets as mixed content.
+        $middleware->trustProxies(at: '*');
+
         $middleware->web(append: [
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
