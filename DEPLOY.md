@@ -9,6 +9,7 @@ isolated by construction — it cannot collide with what is already there:
 | Database | Own MySQL container + named volume. It never touches a host MySQL, and publishes **no** host port. |
 | Web port | nginx binds **127.0.0.1:8081** by default, so it is not on the public internet until you decide how to front it. |
 | Files | Everything lives in the clone directory. Nothing is written outside it. |
+| Secrets | `.dockerignore` keeps `.env*` out of the image; configuration is passed as environment variables at run time. |
 | The existing app | Untouched. No shared ports, no shared volumes, no edits to its config. |
 
 ## 1. Check what is already on the box
@@ -53,7 +54,7 @@ State of the zone as checked:
 
 | Host | Resolves to | Notes |
 |---|---|---|
-| `app.lahza.ai` | 178.104.81.178 | The existing app. DNS-only (no Cloudflare proxy), fronted by host nginx 1.29.8. **Do not touch its server block.** |
+| `app.lahza.ai` | 178.104.81.178 | The existing app. DNS-only (no Cloudflare proxy), served by the `lahza-caddy-1` container. **Leave its Caddyfile block alone.** |
 | `demo.lahza.ai` | Cloudflare | Already serving something else — not available |
 | `lahza.ai` | Cloudflare | Proxied |
 | `*.lahza.ai` | — | No wildcard, so a new record is explicit |
@@ -65,10 +66,10 @@ State of the zone as checked:
 Type: A     Name: cuttosize     Content: 178.104.81.178     Proxy: DNS only (grey cloud)
 ```
 
-Grey cloud, matching how `app.lahza.ai` is set up. Certbot on the host then
-issues a normal Let's Encrypt certificate. (Orange cloud also works, but you
-would be terminating TLS at Cloudflare and need an origin certificate as well —
-more moving parts for no benefit here.)
+Grey cloud, matching how `app.lahza.ai` is set up. Caddy then issues a normal
+Let's Encrypt certificate itself. (Orange cloud also works, but TLS would
+terminate at Cloudflare and Caddy's HTTP-01 challenge would fail — more moving
+parts for no benefit here.)
 
 **2. The reverse proxy is Caddy in a container** (`lahza-caddy-1`, owning 80/443)
 — there is no nginx and no certbot on the host. So: join Caddy's Docker network
@@ -77,12 +78,15 @@ and let it reach the demo by container name. No host port, no TLS work.
 As checked on this box: the network is **`lahza_default`** and the Caddyfile is
 bind-mounted read-only from **`/home/test/deploy/lahza/Caddyfile`**.
 
-Put the network in `.env.production` and recreate, so `web` joins it:
+Put the network in `.env.production` and recreate with the proxy overlay, so
+`web` joins it (`docker-compose.proxy.yml` is what attaches it — without that
+`-f` the stack stays standalone on 127.0.0.1:8081):
 
 ```bash
-cd /opt/cuttosize-demo        # wherever you cloned it
+cd ~/deploy/cuttosize-demo    # wherever you cloned it
 echo 'PROXY_NETWORK=lahza_default' >> .env.production
-docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+docker compose -f docker-compose.prod.yml -f docker-compose.proxy.yml \
+               --env-file .env.production up -d --build
 # confirm Caddy can reach it by container name
 docker exec lahza-caddy-1 wget -qO- http://cuttosize-demo-web-1/login >/dev/null && echo reachable
 ```
@@ -116,9 +120,10 @@ challenge has to reach this server rather than Cloudflare.
 **4. Point the app at its URL:**
 
 ```bash
-cd /opt/cuttosize-demo
+cd ~/deploy/cuttosize-demo
 sed -i 's|^APP_URL=.*|APP_URL=https://cuttosize.lahza.ai|' .env.production
-docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+docker compose -f docker-compose.prod.yml -f docker-compose.proxy.yml \
+               --env-file .env.production up -d
 ```
 
 Then open `https://cuttosize.lahza.ai/login`.
@@ -188,9 +193,10 @@ minutes of work and avoids this.
 ## 5. Day-to-day
 
 ```bash
-# update after a push
-cd /opt/cuttosize-demo && git pull
-docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+# update after a push (add -f docker-compose.proxy.yml if you use a proxy)
+cd ~/deploy/cuttosize-demo && git pull
+docker compose -f docker-compose.prod.yml -f docker-compose.proxy.yml \
+               --env-file .env.production up -d --build
 
 # logs
 docker compose -f docker-compose.prod.yml logs -f app
