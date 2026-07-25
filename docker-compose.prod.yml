@@ -25,7 +25,11 @@ services:
       mysql:
         condition: service_healthy
 
-  web:
+  # Named cuttosize-web, not web: compose publishes the service name as a DNS
+  # alias on every network it joins, and a generic name collides with whatever
+  # the host's reverse proxy already calls its own upstream.
+  cuttosize-web:
+    container_name: cuttosize-demo-web
     build:
       context: .
       target: web

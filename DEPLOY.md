@@ -88,11 +88,20 @@ echo 'PROXY_NETWORK=lahza_default' >> .env.production
 docker compose -f docker-compose.prod.yml -f docker-compose.proxy.yml \
                --env-file .env.production up -d --build
 # confirm Caddy can reach it by container name
-docker exec lahza-caddy-1 wget -qO- http://cuttosize-demo-web-1/login >/dev/null && echo reachable
+docker exec lahza-caddy-1 wget -qO- http://cuttosize-demo-web/login >/dev/null && echo reachable
 ```
 
 **3. Append one site block to the Caddyfile** — back it up first, and leave the
-existing blocks alone:
+existing blocks alone.
+
+> **Check the existing upstream names first.** This Caddyfile reaches the other
+> app with `reverse_proxy web:80`. Docker publishes each compose service name as
+> a DNS alias on every network it joins, so a demo service also called `web`
+> would answer to the same name and Docker would round-robin between them —
+> silently sending half of `app.lahza.ai`'s traffic to the demo. That is why the
+> demo's service is named `cuttosize-web` with an explicit
+> `container_name: cuttosize-demo-web`. If you add more services to the proxy
+> network later, check their names against the proxy's existing upstreams.
 
 ```bash
 cp /home/test/deploy/lahza/Caddyfile ~/Caddyfile.bak.$(date +%F)
@@ -100,7 +109,7 @@ cp /home/test/deploy/lahza/Caddyfile ~/Caddyfile.bak.$(date +%F)
 cat >> /home/test/deploy/lahza/Caddyfile <<'CADDY'
 
 cuttosize.lahza.ai {
-    reverse_proxy cuttosize-demo-web-1:80
+    reverse_proxy cuttosize-demo-web:80
 }
 CADDY
 

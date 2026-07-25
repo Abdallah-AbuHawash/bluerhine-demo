@@ -9,7 +9,7 @@
 #
 # Only `web` joins the proxy network; app and mysql stay private to the project.
 services:
-  web:
+  cuttosize-web:
     networks:
       - default
       - proxy
