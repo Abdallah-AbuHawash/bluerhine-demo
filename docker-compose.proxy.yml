@@ -1,0 +1,20 @@
+# Optional overlay: attach the demo's web container to a reverse proxy that is
+# already running on the host in its own Docker network (Caddy, Traefik,
+# nginx-proxy, ...). The proxy then reaches the demo by container name and no
+# host port is involved.
+#
+#   PROXY_NETWORK=lahza_default \
+#   docker compose -f docker-compose.prod.yml -f docker-compose.proxy.yml \
+#                  --env-file .env.production up -d
+#
+# Only `web` joins the proxy network; app and mysql stay private to the project.
+services:
+  web:
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: ${PROXY_NETWORK:?set PROXY_NETWORK to the proxy's docker network, e.g. lahza_default}

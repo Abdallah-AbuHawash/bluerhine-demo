@@ -34,10 +34,6 @@ services:
       # 127.0.0.1 by default: reachable only from the host, to be reverse-proxied.
       # Set DEMO_BIND=0.0.0.0 to expose it directly on the server's IP.
       - "${DEMO_BIND:-127.0.0.1}:${DEMO_PORT:-8081}:80"
-    networks:
-      - default
-      # Joined only when PROXY_NETWORK names an existing network (see below).
-      - proxy
     depends_on:
       - app
 
@@ -60,14 +56,3 @@ services:
 
 volumes:
   mysql-data:
-
-networks:
-  # Everything internal (app <-> mysql) stays on the project's own network.
-  default:
-  # An existing reverse-proxy network on the host — e.g. the one Caddy or
-  # Traefik already sits on. Only the `web` container joins it, so the proxy
-  # can reach the demo by container name and no host port is needed.
-  #   PROXY_NETWORK=lahza_default
-  proxy:
-    external: true
-    name: ${PROXY_NETWORK:-bridge}
