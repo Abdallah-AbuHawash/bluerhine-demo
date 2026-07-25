@@ -70,36 +70,48 @@ issues a normal Let's Encrypt certificate. (Orange cloud also works, but you
 would be terminating TLS at Cloudflare and need an origin certificate as well —
 more moving parts for no benefit here.)
 
-**2. nginx on the host** — a new file, nothing existing edited:
+**2. The reverse proxy is Caddy in a container** (`lahza-caddy-1`, owning 80/443)
+— there is no nginx and no certbot on the host. So: join Caddy's Docker network
+and let it reach the demo by container name. No host port, no TLS work.
+
+As checked on this box: the network is **`lahza_default`** and the Caddyfile is
+bind-mounted read-only from **`/home/test/deploy/lahza/Caddyfile`**.
+
+Put the network in `.env.production` and recreate, so `web` joins it:
 
 ```bash
-sudo tee /etc/nginx/conf.d/cuttosize-demo.conf >/dev/null <<'NGINX'
-server {
-    listen 80;
-    server_name cuttosize.lahza.ai;
+cd /opt/cuttosize-demo        # wherever you cloned it
+echo 'PROXY_NETWORK=lahza_default' >> .env.production
+docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+# confirm Caddy can reach it by container name
+docker exec lahza-caddy-1 wget -qO- http://cuttosize-demo-web-1/login >/dev/null && echo reachable
+```
 
-    location / {
-        proxy_pass http://127.0.0.1:8081;
-        proxy_set_header Host              $host;
-        proxy_set_header X-Real-IP         $remote_addr;
-        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
+**3. Append one site block to the Caddyfile** — back it up first, and leave the
+existing blocks alone:
+
+```bash
+cp /home/test/deploy/lahza/Caddyfile ~/Caddyfile.bak.$(date +%F)
+
+cat >> /home/test/deploy/lahza/Caddyfile <<'CADDY'
+
+cuttosize.lahza.ai {
+    reverse_proxy cuttosize-demo-web-1:80
 }
-NGINX
+CADDY
 
-sudo nginx -t && sudo systemctl reload nginx
+docker exec lahza-caddy-1 caddy validate --config /etc/caddy/Caddyfile   # check before reloading
+docker exec lahza-caddy-1 caddy reload  --config /etc/caddy/Caddyfile    # zero-downtime for app.lahza.ai
 ```
 
-If this box uses `sites-available`/`sites-enabled` instead of `conf.d`, write it
-there and symlink. `nginx -t` before every reload — it is the difference between
-a new subdomain and taking `app.lahza.ai` down.
+If `validate` fails, restore the backup and reload — `app.lahza.ai` keeps
+running either way, because a failed `reload` leaves the previous config in
+place. The mount is read-only inside the container, so Caddy cannot alter the
+file; you edit it on the host.
 
-**3. TLS**, touching only the new host:
-
-```bash
-sudo certbot --nginx -d cuttosize.lahza.ai
-```
+Caddy issues and renews the certificate itself — nothing else to do for TLS.
+It needs the DNS record from step 1 to be **grey cloud**, since the HTTP-01
+challenge has to reach this server rather than Cloudflare.
 
 **4. Point the app at its URL:**
 
