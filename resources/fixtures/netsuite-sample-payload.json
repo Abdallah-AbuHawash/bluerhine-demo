@@ -1,0 +1,30 @@
+{
+  "_comment": "Placeholder reconstructed from the Phase 1 brief's description of the client's NetSuite sample (the PDF was encrypted and could not be read). Replace this file with their real sample payload; the order-preview screen renders whatever is here.",
+  "param": [
+    {
+      "entity": {
+        "orderId": "SO-2026-0007",
+        "customer": "Aisle One Contracting LLC",
+        "order_date": "2026-07-14",
+        "currency": "AED",
+        "items": [
+          {
+            "item_code": "AS2.8-2016-84-YL",
+            "description": "Acrylic Cast 2.8mm Dark Yellow 2440 x 1220 mm",
+            "qty": 6,
+            "rate": 172.0,
+            "tax_rate": 5
+          },
+          {
+            "item_code": "AS3.0-430-84-XX",
+            "description": "Acrylic Cast 3.0mm Opal White 2440 x 1220 mm",
+            "qty": 4,
+            "rate": 180.0,
+            "tax_rate": 5
+          }
+        ],
+        "remarks": "PO-4471 / delivery to Dubai Investment Park"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1212 @@
+{
+    "mode": "optimized",
+    "strategy": "prefer_portrait",
+    "sheet": {
+        "width_mm": 2440,
+        "height_mm": 1220
+    },
+    "config": {
+        "kerf_mm": 4.4,
+        "trim_top_mm": 10,
+        "trim_right_mm": 10,
+        "trim_bottom_mm": 10,
+        "trim_left_mm": 10,
+        "rotation_allowed": true,
+        "include_trim_in_cut_length": true,
+        "min_offcut_mm": 1
+    },
+    "sheets_consumed": 3,
+    "pieces_placed": 10,
+    "trim_cut_length_mm": 21960,
+    "piece_cut_length_mm": 12000,
+    "total_cut_length_mm": 33960,
+    "total_cut_metres": 33.96,
+    "per_sheet_pieces": [
+        {
+            "sheet_index": 0,
+            "pieces": {
+                "PS1-PNL-CT-1212": 2
+            },
+            "total": 2
+        },
+        {
+            "sheet_index": 1,
+            "pieces": {
+                "PS1-PNL-CT-1212": 2
+            },
+            "total": 2
+        },
+        {
+            "sheet_index": 2,
+            "pieces": {
+                "PS1-PNL-EC-200": 2,
+                "PS1-PNL-IF-1220": 4
+            },
+            "total": 6
+        }
+    ],
+    "offcuts": [
+        {
+            "sheet_index": 0,
+            "x": 2418.8,
+            "y": 10,
+            "w": 11.2,
+            "h": 1200
+        },
+        {
+            "sheet_index": 1,
+            "x": 2418.8,
+            "y": 10,
+            "w": 11.2,
+            "h": 1200
+        },
+        {
+            "sheet_index": 2,
+            "x": 1236.4,
+            "y": 10,
+            "w": 1193.6,
+            "h": 1200
+        }
+    ],
+    "total_offcut_area_mm2": 1459200,
+    "unplaceable_pieces": [],
+    "layouts": [
+        {
+            "index": 0,
+            "sheet": {
+                "width_mm": 2440,
+                "height_mm": 1220
+            },
+            "usable": {
+                "x": 10,
+                "y": 10,
+                "w": 2420,
+                "h": 1200
+            },
+            "placements": [
+                {
+                    "label": "PS1-PNL-CT-1212",
+                    "x": 10,
+                    "y": 10,
+                    "w": 1200,
+                    "h": 1200,
+                    "rotated": false,
+                    "instance_index": 0
+                },
+                {
+                    "label": "PS1-PNL-CT-1212",
+                    "x": 1214.4,
+                    "y": 10,
+                    "w": 1200,
+                    "h": 1200,
+                    "rotated": false,
+                    "instance_index": 1
+                }
+            ],
+            "offcuts": [
+                {
+                    "x": 2418.8,
+                    "y": 10,
+                    "w": 11.2,
+                    "h": 1200
+                }
+            ],
+            "cuts": [
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 0,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 2430,
+                    "y1": 0,
+                    "x2": 2430,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 1210,
+                    "y1": 10,
+                    "x2": 1210,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 2414.4,
+                    "y1": 10,
+                    "x2": 2414.4,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 1210,
+                    "x2": 2440,
+                    "y2": 1210,
+                    "length_mm": 2440
+                }
+            ],
+            "piece_counts": {
+                "PS1-PNL-CT-1212": 2
+            },
+            "trim_cut_length_mm": 7320,
+            "piece_cut_length_mm": 2400,
+            "yield_pct": 96.75,
+            "tree": {
+                "kind": "split",
+                "rect": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 2440,
+                    "h": 1220
+                },
+                "cut": {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                "children": [
+                    {
+                        "kind": "split",
+                        "rect": {
+                            "x": 0,
+                            "y": 10,
+                            "w": 2440,
+                            "h": 1210
+                        },
+                        "cut": {
+                            "kind": "trim",
+                            "axis": "vertical",
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1220,
+                            "length_mm": 1220
+                        },
+                        "children": [
+                            {
+                                "kind": "split",
+                                "rect": {
+                                    "x": 10,
+                                    "y": 10,
+                                    "w": 2430,
+                                    "h": 1210
+                                },
+                                "cut": {
+                                    "kind": "trim",
+                                    "axis": "horizontal",
+                                    "x1": 0,
+                                    "y1": 1210,
+                                    "x2": 2440,
+                                    "y2": 1210,
+                                    "length_mm": 2440
+                                },
+                                "children": [
+                                    {
+                                        "kind": "split",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 10,
+                                            "w": 2430,
+                                            "h": 1200
+                                        },
+                                        "cut": {
+                                            "kind": "trim",
+                                            "axis": "vertical",
+                                            "x1": 2430,
+                                            "y1": 0,
+                                            "x2": 2430,
+                                            "y2": 1220,
+                                            "length_mm": 1220
+                                        },
+                                        "children": [
+                                            {
+                                                "kind": "split",
+                                                "rect": {
+                                                    "x": 10,
+                                                    "y": 10,
+                                                    "w": 2420,
+                                                    "h": 1200
+                                                },
+                                                "cut": {
+                                                    "kind": "rip",
+                                                    "axis": "vertical",
+                                                    "x1": 1210,
+                                                    "y1": 10,
+                                                    "x2": 1210,
+                                                    "y2": 1210,
+                                                    "length_mm": 1200
+                                                },
+                                                "children": [
+                                                    {
+                                                        "kind": "piece",
+                                                        "rect": {
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 1200,
+                                                            "h": 1200
+                                                        },
+                                                        "placement": {
+                                                            "label": "PS1-PNL-CT-1212",
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 1200,
+                                                            "h": 1200,
+                                                            "rotated": false,
+                                                            "instance_index": 0
+                                                        }
+                                                    },
+                                                    {
+                                                        "kind": "split",
+                                                        "rect": {
+                                                            "x": 1214.4,
+                                                            "y": 10,
+                                                            "w": 1215.6,
+                                                            "h": 1200
+                                                        },
+                                                        "cut": {
+                                                            "kind": "rip",
+                                                            "axis": "vertical",
+                                                            "x1": 2414.4,
+                                                            "y1": 10,
+                                                            "x2": 2414.4,
+                                                            "y2": 1210,
+                                                            "length_mm": 1200
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "kind": "piece",
+                                                                "rect": {
+                                                                    "x": 1214.4,
+                                                                    "y": 10,
+                                                                    "w": 1200,
+                                                                    "h": 1200
+                                                                },
+                                                                "placement": {
+                                                                    "label": "PS1-PNL-CT-1212",
+                                                                    "x": 1214.4,
+                                                                    "y": 10,
+                                                                    "w": 1200,
+                                                                    "h": 1200,
+                                                                    "rotated": false,
+                                                                    "instance_index": 1
+                                                                }
+                                                            },
+                                                            {
+                                                                "kind": "offcut",
+                                                                "rect": {
+                                                                    "x": 2418.8,
+                                                                    "y": 10,
+                                                                    "w": 11.2,
+                                                                    "h": 1200
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "kind": "trim",
+                                                "rect": {
+                                                    "x": 2430,
+                                                    "y": 10,
+                                                    "w": 10,
+                                                    "h": 1200
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "trim",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 1210,
+                                            "w": 2430,
+                                            "h": 10
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "trim",
+                                "rect": {
+                                    "x": 0,
+                                    "y": 10,
+                                    "w": 10,
+                                    "h": 1210
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "kind": "trim",
+                        "rect": {
+                            "x": 0,
+                            "y": 0,
+                            "w": 2440,
+                            "h": 10
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "index": 1,
+            "sheet": {
+                "width_mm": 2440,
+                "height_mm": 1220
+            },
+            "usable": {
+                "x": 10,
+                "y": 10,
+                "w": 2420,
+                "h": 1200
+            },
+            "placements": [
+                {
+                    "label": "PS1-PNL-CT-1212",
+                    "x": 10,
+                    "y": 10,
+                    "w": 1200,
+                    "h": 1200,
+                    "rotated": false,
+                    "instance_index": 2
+                },
+                {
+                    "label": "PS1-PNL-CT-1212",
+                    "x": 1214.4,
+                    "y": 10,
+                    "w": 1200,
+                    "h": 1200,
+                    "rotated": false,
+                    "instance_index": 3
+                }
+            ],
+            "offcuts": [
+                {
+                    "x": 2418.8,
+                    "y": 10,
+                    "w": 11.2,
+                    "h": 1200
+                }
+            ],
+            "cuts": [
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 0,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 2430,
+                    "y1": 0,
+                    "x2": 2430,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 1210,
+                    "y1": 10,
+                    "x2": 1210,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 2414.4,
+                    "y1": 10,
+                    "x2": 2414.4,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 1210,
+                    "x2": 2440,
+                    "y2": 1210,
+                    "length_mm": 2440
+                }
+            ],
+            "piece_counts": {
+                "PS1-PNL-CT-1212": 2
+            },
+            "trim_cut_length_mm": 7320,
+            "piece_cut_length_mm": 2400,
+            "yield_pct": 96.75,
+            "tree": {
+                "kind": "split",
+                "rect": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 2440,
+                    "h": 1220
+                },
+                "cut": {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                "children": [
+                    {
+                        "kind": "split",
+                        "rect": {
+                            "x": 0,
+                            "y": 10,
+                            "w": 2440,
+                            "h": 1210
+                        },
+                        "cut": {
+                            "kind": "trim",
+                            "axis": "vertical",
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1220,
+                            "length_mm": 1220
+                        },
+                        "children": [
+                            {
+                                "kind": "split",
+                                "rect": {
+                                    "x": 10,
+                                    "y": 10,
+                                    "w": 2430,
+                                    "h": 1210
+                                },
+                                "cut": {
+                                    "kind": "trim",
+                                    "axis": "horizontal",
+                                    "x1": 0,
+                                    "y1": 1210,
+                                    "x2": 2440,
+                                    "y2": 1210,
+                                    "length_mm": 2440
+                                },
+                                "children": [
+                                    {
+                                        "kind": "split",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 10,
+                                            "w": 2430,
+                                            "h": 1200
+                                        },
+                                        "cut": {
+                                            "kind": "trim",
+                                            "axis": "vertical",
+                                            "x1": 2430,
+                                            "y1": 0,
+                                            "x2": 2430,
+                                            "y2": 1220,
+                                            "length_mm": 1220
+                                        },
+                                        "children": [
+                                            {
+                                                "kind": "split",
+                                                "rect": {
+                                                    "x": 10,
+                                                    "y": 10,
+                                                    "w": 2420,
+                                                    "h": 1200
+                                                },
+                                                "cut": {
+                                                    "kind": "rip",
+                                                    "axis": "vertical",
+                                                    "x1": 1210,
+                                                    "y1": 10,
+                                                    "x2": 1210,
+                                                    "y2": 1210,
+                                                    "length_mm": 1200
+                                                },
+                                                "children": [
+                                                    {
+                                                        "kind": "piece",
+                                                        "rect": {
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 1200,
+                                                            "h": 1200
+                                                        },
+                                                        "placement": {
+                                                            "label": "PS1-PNL-CT-1212",
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 1200,
+                                                            "h": 1200,
+                                                            "rotated": false,
+                                                            "instance_index": 2
+                                                        }
+                                                    },
+                                                    {
+                                                        "kind": "split",
+                                                        "rect": {
+                                                            "x": 1214.4,
+                                                            "y": 10,
+                                                            "w": 1215.6,
+                                                            "h": 1200
+                                                        },
+                                                        "cut": {
+                                                            "kind": "rip",
+                                                            "axis": "vertical",
+                                                            "x1": 2414.4,
+                                                            "y1": 10,
+                                                            "x2": 2414.4,
+                                                            "y2": 1210,
+                                                            "length_mm": 1200
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "kind": "piece",
+                                                                "rect": {
+                                                                    "x": 1214.4,
+                                                                    "y": 10,
+                                                                    "w": 1200,
+                                                                    "h": 1200
+                                                                },
+                                                                "placement": {
+                                                                    "label": "PS1-PNL-CT-1212",
+                                                                    "x": 1214.4,
+                                                                    "y": 10,
+                                                                    "w": 1200,
+                                                                    "h": 1200,
+                                                                    "rotated": false,
+                                                                    "instance_index": 3
+                                                                }
+                                                            },
+                                                            {
+                                                                "kind": "offcut",
+                                                                "rect": {
+                                                                    "x": 2418.8,
+                                                                    "y": 10,
+                                                                    "w": 11.2,
+                                                                    "h": 1200
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "kind": "trim",
+                                                "rect": {
+                                                    "x": 2430,
+                                                    "y": 10,
+                                                    "w": 10,
+                                                    "h": 1200
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "trim",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 1210,
+                                            "w": 2430,
+                                            "h": 10
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "trim",
+                                "rect": {
+                                    "x": 0,
+                                    "y": 10,
+                                    "w": 10,
+                                    "h": 1210
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "kind": "trim",
+                        "rect": {
+                            "x": 0,
+                            "y": 0,
+                            "w": 2440,
+                            "h": 10
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "index": 2,
+            "sheet": {
+                "width_mm": 2440,
+                "height_mm": 1220
+            },
+            "usable": {
+                "x": 10,
+                "y": 10,
+                "w": 2420,
+                "h": 1200
+            },
+            "placements": [
+                {
+                    "label": "PS1-PNL-EC-200",
+                    "x": 10,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 8
+                },
+                {
+                    "label": "PS1-PNL-EC-200",
+                    "x": 214.4,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 9
+                },
+                {
+                    "label": "PS1-PNL-IF-1220",
+                    "x": 418.8,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 4
+                },
+                {
+                    "label": "PS1-PNL-IF-1220",
+                    "x": 623.2,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 5
+                },
+                {
+                    "label": "PS1-PNL-IF-1220",
+                    "x": 827.6,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 6
+                },
+                {
+                    "label": "PS1-PNL-IF-1220",
+                    "x": 1032,
+                    "y": 10,
+                    "w": 200,
+                    "h": 1200,
+                    "rotated": true,
+                    "instance_index": 7
+                }
+            ],
+            "offcuts": [
+                {
+                    "x": 1236.4,
+                    "y": 10,
+                    "w": 1193.6,
+                    "h": 1200
+                }
+            ],
+            "cuts": [
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 0,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "trim",
+                    "axis": "vertical",
+                    "x1": 2430,
+                    "y1": 0,
+                    "x2": 2430,
+                    "y2": 1220,
+                    "length_mm": 1220
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 210,
+                    "y1": 10,
+                    "x2": 210,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 414.4,
+                    "y1": 10,
+                    "x2": 414.4,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 618.8,
+                    "y1": 10,
+                    "x2": 618.8,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 823.2,
+                    "y1": 10,
+                    "x2": 823.2,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 1027.6,
+                    "y1": 10,
+                    "x2": 1027.6,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "rip",
+                    "axis": "vertical",
+                    "x1": 1232,
+                    "y1": 10,
+                    "x2": 1232,
+                    "y2": 1210,
+                    "length_mm": 1200
+                },
+                {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 1210,
+                    "x2": 2440,
+                    "y2": 1210,
+                    "length_mm": 2440
+                }
+            ],
+            "piece_counts": {
+                "PS1-PNL-EC-200": 2,
+                "PS1-PNL-IF-1220": 4
+            },
+            "trim_cut_length_mm": 7320,
+            "piece_cut_length_mm": 7200,
+            "yield_pct": 48.37,
+            "tree": {
+                "kind": "split",
+                "rect": {
+                    "x": 0,
+                    "y": 0,
+                    "w": 2440,
+                    "h": 1220
+                },
+                "cut": {
+                    "kind": "trim",
+                    "axis": "horizontal",
+                    "x1": 0,
+                    "y1": 0,
+                    "x2": 2440,
+                    "y2": 0,
+                    "length_mm": 2440
+                },
+                "children": [
+                    {
+                        "kind": "split",
+                        "rect": {
+                            "x": 0,
+                            "y": 10,
+                            "w": 2440,
+                            "h": 1210
+                        },
+                        "cut": {
+                            "kind": "trim",
+                            "axis": "vertical",
+                            "x1": 0,
+                            "y1": 0,
+                            "x2": 0,
+                            "y2": 1220,
+                            "length_mm": 1220
+                        },
+                        "children": [
+                            {
+                                "kind": "split",
+                                "rect": {
+                                    "x": 10,
+                                    "y": 10,
+                                    "w": 2430,
+                                    "h": 1210
+                                },
+                                "cut": {
+                                    "kind": "trim",
+                                    "axis": "horizontal",
+                                    "x1": 0,
+                                    "y1": 1210,
+                                    "x2": 2440,
+                                    "y2": 1210,
+                                    "length_mm": 2440
+                                },
+                                "children": [
+                                    {
+                                        "kind": "split",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 10,
+                                            "w": 2430,
+                                            "h": 1200
+                                        },
+                                        "cut": {
+                                            "kind": "trim",
+                                            "axis": "vertical",
+                                            "x1": 2430,
+                                            "y1": 0,
+                                            "x2": 2430,
+                                            "y2": 1220,
+                                            "length_mm": 1220
+                                        },
+                                        "children": [
+                                            {
+                                                "kind": "split",
+                                                "rect": {
+                                                    "x": 10,
+                                                    "y": 10,
+                                                    "w": 2420,
+                                                    "h": 1200
+                                                },
+                                                "cut": {
+                                                    "kind": "rip",
+                                                    "axis": "vertical",
+                                                    "x1": 210,
+                                                    "y1": 10,
+                                                    "x2": 210,
+                                                    "y2": 1210,
+                                                    "length_mm": 1200
+                                                },
+                                                "children": [
+                                                    {
+                                                        "kind": "piece",
+                                                        "rect": {
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 200,
+                                                            "h": 1200
+                                                        },
+                                                        "placement": {
+                                                            "label": "PS1-PNL-EC-200",
+                                                            "x": 10,
+                                                            "y": 10,
+                                                            "w": 200,
+                                                            "h": 1200,
+                                                            "rotated": true,
+                                                            "instance_index": 8
+                                                        }
+                                                    },
+                                                    {
+                                                        "kind": "split",
+                                                        "rect": {
+                                                            "x": 214.4,
+                                                            "y": 10,
+                                                            "w": 2215.6,
+                                                            "h": 1200
+                                                        },
+                                                        "cut": {
+                                                            "kind": "rip",
+                                                            "axis": "vertical",
+                                                            "x1": 414.4,
+                                                            "y1": 10,
+                                                            "x2": 414.4,
+                                                            "y2": 1210,
+                                                            "length_mm": 1200
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "kind": "piece",
+                                                                "rect": {
+                                                                    "x": 214.4,
+                                                                    "y": 10,
+                                                                    "w": 200,
+                                                                    "h": 1200
+                                                                },
+                                                                "placement": {
+                                                                    "label": "PS1-PNL-EC-200",
+                                                                    "x": 214.4,
+                                                                    "y": 10,
+                                                                    "w": 200,
+                                                                    "h": 1200,
+                                                                    "rotated": true,
+                                                                    "instance_index": 9
+                                                                }
+                                                            },
+                                                            {
+                                                                "kind": "split",
+                                                                "rect": {
+                                                                    "x": 418.8,
+                                                                    "y": 10,
+                                                                    "w": 2011.2,
+                                                                    "h": 1200
+                                                                },
+                                                                "cut": {
+                                                                    "kind": "rip",
+                                                                    "axis": "vertical",
+                                                                    "x1": 618.8,
+                                                                    "y1": 10,
+                                                                    "x2": 618.8,
+                                                                    "y2": 1210,
+                                                                    "length_mm": 1200
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "kind": "piece",
+                                                                        "rect": {
+                                                                            "x": 418.8,
+                                                                            "y": 10,
+                                                                            "w": 200,
+                                                                            "h": 1200
+                                                                        },
+                                                                        "placement": {
+                                                                            "label": "PS1-PNL-IF-1220",
+                                                                            "x": 418.8,
+                                                                            "y": 10,
+                                                                            "w": 200,
+                                                                            "h": 1200,
+                                                                            "rotated": true,
+                                                                            "instance_index": 4
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "kind": "split",
+                                                                        "rect": {
+                                                                            "x": 623.2,
+                                                                            "y": 10,
+                                                                            "w": 1806.8,
+                                                                            "h": 1200
+                                                                        },
+                                                                        "cut": {
+                                                                            "kind": "rip",
+                                                                            "axis": "vertical",
+                                                                            "x1": 823.2,
+                                                                            "y1": 10,
+                                                                            "x2": 823.2,
+                                                                            "y2": 1210,
+                                                                            "length_mm": 1200
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "kind": "piece",
+                                                                                "rect": {
+                                                                                    "x": 623.2,
+                                                                                    "y": 10,
+                                                                                    "w": 200,
+                                                                                    "h": 1200
+                                                                                },
+                                                                                "placement": {
+                                                                                    "label": "PS1-PNL-IF-1220",
+                                                                                    "x": 623.2,
+                                                                                    "y": 10,
+                                                                                    "w": 200,
+                                                                                    "h": 1200,
+                                                                                    "rotated": true,
+                                                                                    "instance_index": 5
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "kind": "split",
+                                                                                "rect": {
+                                                                                    "x": 827.6,
+                                                                                    "y": 10,
+                                                                                    "w": 1602.4,
+                                                                                    "h": 1200
+                                                                                },
+                                                                                "cut": {
+                                                                                    "kind": "rip",
+                                                                                    "axis": "vertical",
+                                                                                    "x1": 1027.6,
+                                                                                    "y1": 10,
+                                                                                    "x2": 1027.6,
+                                                                                    "y2": 1210,
+                                                                                    "length_mm": 1200
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "kind": "piece",
+                                                                                        "rect": {
+                                                                                            "x": 827.6,
+                                                                                            "y": 10,
+                                                                                            "w": 200,
+                                                                                            "h": 1200
+                                                                                        },
+                                                                                        "placement": {
+                                                                                            "label": "PS1-PNL-IF-1220",
+                                                                                            "x": 827.6,
+                                                                                            "y": 10,
+                                                                                            "w": 200,
+                                                                                            "h": 1200,
+                                                                                            "rotated": true,
+                                                                                            "instance_index": 6
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "kind": "split",
+                                                                                        "rect": {
+                                                                                            "x": 1032,
+                                                                                            "y": 10,
+                                                                                            "w": 1398,
+                                                                                            "h": 1200
+                                                                                        },
+                                                                                        "cut": {
+                                                                                            "kind": "rip",
+                                                                                            "axis": "vertical",
+                                                                                            "x1": 1232,
+                                                                                            "y1": 10,
+                                                                                            "x2": 1232,
+                                                                                            "y2": 1210,
+                                                                                            "length_mm": 1200
+                                                                                        },
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "kind": "piece",
+                                                                                                "rect": {
+                                                                                                    "x": 1032,
+                                                                                                    "y": 10,
+                                                                                                    "w": 200,
+                                                                                                    "h": 1200
+                                                                                                },
+                                                                                                "placement": {
+                                                                                                    "label": "PS1-PNL-IF-1220",
+                                                                                                    "x": 1032,
+                                                                                                    "y": 10,
+                                                                                                    "w": 200,
+                                                                                                    "h": 1200,
+                                                                                                    "rotated": true,
+                                                                                                    "instance_index": 7
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "kind": "offcut",
+                                                                                                "rect": {
+                                                                                                    "x": 1236.4,
+                                                                                                    "y": 10,
+                                                                                                    "w": 1193.6,
+                                                                                                    "h": 1200
+                                                                                                }
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "kind": "trim",
+                                                "rect": {
+                                                    "x": 2430,
+                                                    "y": 10,
+                                                    "w": 10,
+                                                    "h": 1200
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "kind": "trim",
+                                        "rect": {
+                                            "x": 10,
+                                            "y": 1210,
+                                            "w": 2430,
+                                            "h": 10
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "kind": "trim",
+                                "rect": {
+                                    "x": 0,
+                                    "y": 10,
+                                    "w": 10,
+                                    "h": 1210
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "kind": "trim",
+                        "rect": {
+                            "x": 0,
+                            "y": 0,
+                            "w": 2440,
+                            "h": 10
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
