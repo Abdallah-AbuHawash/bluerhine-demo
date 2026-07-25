@@ -1,7 +1,15 @@
 import { Head, useForm } from '@inertiajs/react';
 import type { FormEvent } from 'react';
 
-export default function Login({ demoEmail, demoPassword }: { demoEmail: string; demoPassword: string }) {
+export default function Login({
+    demoEmail,
+    demoPassword,
+    showHint,
+}: {
+    demoEmail: string;
+    demoPassword: string;
+    showHint: boolean;
+}) {
     const form = useForm({ email: demoEmail, password: demoPassword });
 
     function submit(event: FormEvent) {
@@ -47,9 +55,11 @@ export default function Login({ demoEmail, demoPassword }: { demoEmail: string; 
                     Sign in
                 </button>
 
-                <p className="mt-4 text-xs text-slate-400">
-                    Demo credentials are pre-filled: {demoEmail} / {demoPassword}
-                </p>
+                {showHint && (
+                    <p className="mt-4 text-xs text-slate-400">
+                        Demo credentials are pre-filled: {demoEmail} / {demoPassword}
+                    </p>
+                )}
             </form>
         </div>
     );

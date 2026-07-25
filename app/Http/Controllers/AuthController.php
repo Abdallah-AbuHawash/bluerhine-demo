@@ -16,9 +16,14 @@ class AuthController extends Controller
 {
     public function show(): Response
     {
+        // Pre-filling is a local convenience. Once real credentials are set for
+        // a hosted demo, the form comes up empty and the hint disappears.
+        $prefill = (bool) config('demo.prefill_login');
+
         return Inertia::render('Auth/Login', [
-            'demoEmail' => 'demo@cuttosize.test',
-            'demoPassword' => 'password',
+            'demoEmail' => $prefill ? config('demo.user.email') : '',
+            'demoPassword' => $prefill ? config('demo.user.password') : '',
+            'showHint' => $prefill,
         ]);
     }
 
