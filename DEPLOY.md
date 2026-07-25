@@ -47,6 +47,70 @@ First build takes a few minutes: it compiles the frontend and installs PHP
 dependencies inside the image, so the server needs neither Node nor PHP.
 Migrations and the demo seed run automatically at boot.
 
+## 3b. This box, concretely (lahza.ai)
+
+State of the zone as checked:
+
+| Host | Resolves to | Notes |
+|---|---|---|
+| `app.lahza.ai` | 178.104.81.178 | The existing app. DNS-only (no Cloudflare proxy), fronted by host nginx 1.29.8. **Do not touch its server block.** |
+| `demo.lahza.ai` | Cloudflare | Already serving something else — not available |
+| `lahza.ai` | Cloudflare | Proxied |
+| `*.lahza.ai` | — | No wildcard, so a new record is explicit |
+| `cuttosize.lahza.ai` | — | **Free. Use this.** |
+
+**1. Cloudflare DNS** → add an `A` record:
+
+```
+Type: A     Name: cuttosize     Content: 178.104.81.178     Proxy: DNS only (grey cloud)
+```
+
+Grey cloud, matching how `app.lahza.ai` is set up. Certbot on the host then
+issues a normal Let's Encrypt certificate. (Orange cloud also works, but you
+would be terminating TLS at Cloudflare and need an origin certificate as well —
+more moving parts for no benefit here.)
+
+**2. nginx on the host** — a new file, nothing existing edited:
+
+```bash
+sudo tee /etc/nginx/conf.d/cuttosize-demo.conf >/dev/null <<'NGINX'
+server {
+    listen 80;
+    server_name cuttosize.lahza.ai;
+
+    location / {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+NGINX
+
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+If this box uses `sites-available`/`sites-enabled` instead of `conf.d`, write it
+there and symlink. `nginx -t` before every reload — it is the difference between
+a new subdomain and taking `app.lahza.ai` down.
+
+**3. TLS**, touching only the new host:
+
+```bash
+sudo certbot --nginx -d cuttosize.lahza.ai
+```
+
+**4. Point the app at its URL:**
+
+```bash
+cd /opt/cuttosize-demo
+sed -i 's|^APP_URL=.*|APP_URL=https://cuttosize.lahza.ai|' .env.production
+docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+```
+
+Then open `https://cuttosize.lahza.ai/login`.
+
 ## 4. Put it on the internet
 
 ### Option A — you already run nginx on the host (most likely)
